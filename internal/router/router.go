@@ -1,6 +1,14 @@
 package router
 
-import "github.com/labstack/echo"
+import (
+	"context"
+
+	"books.api/internal/domain"
+	"books.api/internal/store"
+	"github.com/labstack/echo"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
+)
 
 func New() *echo.Echo {
 	// create a new echo instance
@@ -19,12 +27,22 @@ func New() *echo.Echo {
 	//set groupRoutes
 	// api.AdminGroup(adminGroup)
 
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI("mongodb://root:example@localhost:27017"))
+	if err != nil {
+		panic("failed to connect database")
+	}
+	collection := client.Database("myapp").Collection("todos")
+	// gormStore := store.NewGormStore(db)
+	mongoStore := store.NewMongoDBStore(collection)
+
+	handler := domain.NewHandler(mongoStore)
+
 	// Routes
-	// v1 := e.Group("/api/v1")
-	// {
-	// 	v1.POST("/members", api.PostMember())
-	// 	v1.GET("/members", api.GetMembers())
-	// 	v1.GET("/members/:id", api.GetMember())
-	// }
+	v1 := e.Group("/api/v1")
+	{
+		v1.POST("/books", handler.AddBook)
+		// v1.GET("/members", api.GetMembers())
+		// v1.GET("/members/:id", api.GetMember())
+	}
 	return e
 }
