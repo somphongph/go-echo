@@ -32,6 +32,7 @@ func New() *echo.Echo {
 		panic("failed to connect database")
 	}
 	collection := client.Database("bookstore").Collection("books")
+
 	// gormStore := store.NewGormStore(db)
 	mongoStore := store.NewMongoDBStore(collection)
 
@@ -44,5 +45,8 @@ func New() *echo.Echo {
 		// v1.GET("/members", api.GetMembers())
 		// v1.GET("/members/:id", api.GetMember())
 	}
+
+	e.Logger.Fatal(e.Start(":1323"))
+
 	return e
 }

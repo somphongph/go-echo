@@ -23,13 +23,12 @@ func NewHandler(store storer) *Handler {
 }
 
 func (t *Handler) AddBook(c echo.Context) error {
-	var book Book
-	// book := new(Book)
+	book := new(Book)
 	if err := c.Bind(&book); err != nil {
 		return err
 	}
 
-	err := t.store.Add(&book)
+	err := t.store.Add(book)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, "Error")
 
