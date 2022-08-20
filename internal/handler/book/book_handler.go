@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"time"
 
+	"books.api/internal/common"
 	"books.api/internal/entity"
 	"github.com/labstack/echo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -42,5 +43,5 @@ func (t *Handler) AddBook(c echo.Context) error {
 		return err
 	}
 
-	return c.JSON(http.StatusOK, book)
+	return c.JSON(http.StatusOK, common.Response(book))
 }

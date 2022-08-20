@@ -22,16 +22,6 @@ func NewMongoDBStore() *MongoDBStore {
 	return &MongoDBStore{Collection: collection}
 }
 
-// func (s *MongoDBStore) Get(book *domain.Book) error {
-// 	_, err := s.Collection.Find(book ,"")
-// 	return err
-// }
-
-// func (s *MongoDBStore) Gets(book *domain.Book) error {
-// 	_, err := s.Collection.InsertOne(context.Background(), book)
-// 	return err
-// }
-
 func (s *MongoDBStore) Add(book *entity.Book) error {
 	_, err := s.Collection.InsertOne(context.Background(), book)
 	return err
@@ -46,3 +36,13 @@ func (s *MongoDBStore) Delete(book *entity.Book) error {
 	_, err := s.Collection.DeleteOne(context.Background(), book)
 	return err
 }
+
+// func (s *MongoDBStore) Get(book *domain.Book) error {
+// 	_, err := s.Collection.Find(book ,"")
+// 	return err
+// }
+
+// func (s *MongoDBStore) Gets(book *domain.Book) error {
+// 	_, err := s.Collection.InsertOne(context.Background(), book)
+// 	return err
+// }
