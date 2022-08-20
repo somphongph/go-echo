@@ -2,9 +2,11 @@ package book
 
 import (
 	"net/http"
+	"time"
 
 	"books.api/internal/entity"
 	"github.com/labstack/echo"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type storer interface {
@@ -20,9 +22,17 @@ func NewHandler(store storer) *Handler {
 }
 
 func (t *Handler) AddBook(c echo.Context) error {
-	book := new(entity.Book)
-	if err := c.Bind(&book); err != nil {
+	bookRequest := new(bookRequest)
+	if err := c.Bind(&bookRequest); err != nil {
 		return err
+	}
+
+	book := &entity.Book{
+		Id:        primitive.NewObjectID(),
+		Name:      bookRequest.Name,
+		Title:     bookRequest.Title,
+		CreatedAt: time.Now(),
+		UpdatedAt: time.Now(),
 	}
 
 	err := t.store.Add(book)

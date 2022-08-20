@@ -10,6 +10,6 @@ type Book struct {
 	Id        primitive.ObjectID `json:"id" bson:"_id"`
 	Name      string             `json:"name"`
 	Title     string             `json:"title"`
-	CreatedAt time.Time          `bson:"createdAt"`
-	UpdatedAt time.Time          `bson:"updatedAt"`
+	CreatedAt time.Time          `json:"createdAt" bson:"createdAt"`
+	UpdatedAt time.Time          `json:"updatedAt" bson:"updatedAt"`
 }
