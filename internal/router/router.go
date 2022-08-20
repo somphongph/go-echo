@@ -22,6 +22,15 @@ func New() *echo.Echo {
 		// v1.GET("/members/:id", api.GetMember())
 	}
 
+	// authors
+	// authorHandler := book.NewHandler(store.NewMongoDBStore())
+	authors := api.Group("/v1/authors")
+	{
+		authors.POST("", bookHandler.AddBook)
+		// v1.GET("/members", api.GetMembers())
+		// v1.GET("/members/:id", api.GetMember())
+	}
+
 	// categories
 	// categories := api.Group("/categories")
 	// {

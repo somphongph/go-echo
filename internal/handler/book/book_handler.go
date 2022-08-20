@@ -6,6 +6,7 @@ import (
 
 	"books.api/internal/common"
 	"books.api/internal/entity"
+	"books.api/internal/model"
 	"github.com/labstack/echo"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
@@ -30,8 +31,8 @@ func (t *Handler) AddBook(c echo.Context) error {
 
 	book := &entity.Book{
 		Id:        primitive.NewObjectID(),
-		Name:      bookRequest.Name,
-		Title:     bookRequest.Title,
+		Name:      model.Locale{En: bookRequest.Name.En, Th: bookRequest.Title.Th},
+		Title:     model.Locale{En: bookRequest.Title.En, Th: bookRequest.Title.Th},
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}
