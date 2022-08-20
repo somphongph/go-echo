@@ -24,16 +24,17 @@ func NewHandler(store storer) *Handler {
 
 func (t *Handler) AddBook(c echo.Context) error {
 	var book Book
+	// book := new(Book)
+	if err := c.Bind(&book); err != nil {
+		return err
+	}
 
 	err := t.store.Add(&book)
 	if err != nil {
-		c.JSON(http.StatusInternalServerError, "Test")
+		c.JSON(http.StatusInternalServerError, "Error")
 
 		return err
 	}
 
-	return c.JSON(http.StatusOK, "Test")
-	// c.JSON(http.StatusCreated, map[string]interface{}{
-	// 	"ID": todo.ID,
-	// })
+	return c.JSON(http.StatusOK, book)
 }

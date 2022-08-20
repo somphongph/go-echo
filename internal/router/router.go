@@ -31,7 +31,7 @@ func New() *echo.Echo {
 	if err != nil {
 		panic("failed to connect database")
 	}
-	collection := client.Database("myapp").Collection("todos")
+	collection := client.Database("bookstore").Collection("books")
 	// gormStore := store.NewGormStore(db)
 	mongoStore := store.NewMongoDBStore(collection)
 
