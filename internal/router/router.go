@@ -1,7 +1,7 @@
 package router
 
 import (
-	"books.api/internal/handlers/book"
+	"books.api/internal/handler/book"
 	"books.api/internal/store"
 	"github.com/labstack/echo"
 )
@@ -10,15 +10,14 @@ func New() *echo.Echo {
 	// create a new echo instance
 	e := echo.New()
 
-	domain := book.NewHandler(store.NewMongoDBStore())
-
 	// Routes
 	api := e.Group("/api")
 
 	// books
+	bookHandler := book.NewHandler(store.NewMongoDBStore())
 	books := api.Group("/v1/books")
 	{
-		books.POST("", domain.AddBook)
+		books.POST("", bookHandler.AddBook)
 		// v1.GET("/members", api.GetMembers())
 		// v1.GET("/members/:id", api.GetMember())
 	}

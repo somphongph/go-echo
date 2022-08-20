@@ -3,7 +3,7 @@ package store
 import (
 	"context"
 
-	"books.api/internal/handlers/book"
+	"books.api/internal/entity"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -32,7 +32,7 @@ func NewMongoDBStore() *MongoDBStore {
 // 	return err
 // }
 
-func (s *MongoDBStore) Add(book *book.Book) error {
+func (s *MongoDBStore) Add(book *entity.Book) error {
 	_, err := s.Collection.InsertOne(context.Background(), book)
 	return err
 }
@@ -42,7 +42,7 @@ func (s *MongoDBStore) Add(book *book.Book) error {
 // 	return err
 // }
 
-func (s *MongoDBStore) Delete(book *book.Book) error {
+func (s *MongoDBStore) Delete(book *entity.Book) error {
 	_, err := s.Collection.DeleteOne(context.Background(), book)
 	return err
 }
