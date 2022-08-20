@@ -1,14 +1,10 @@
-package domain
+package book
 
 import (
 	"net/http"
 
 	"github.com/labstack/echo"
 )
-
-func (Book) TableName() string {
-	return "books"
-}
 
 type storer interface {
 	Add(*Book) error

@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Fri Aug 19 07:17:33 2022
+# Make data base, printed on Sat Aug 20 21:40:49 2022
 
 # Variables
 
@@ -18,11 +18,8 @@ make: *** No rule to make target `all'.  Stop.
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-ELECTRON_NO_ATTACH_CONSOLE = 1
-# environment
-LC_CTYPE = UTF-8
 # automatic
+ 
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
@@ -43,20 +40,21 @@ VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-VSCODE_CWD = /Users/spph/work/lab/books.api
+VSCODE_CWD = /
 # environment
 GOPROXY = https://proxy.golang.org,direct
 # environment
 PATH = /usr/local/opt/openjdk@8/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/share/dotnet:~/.dotnet/tools:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/spph/work/flutter/flutter/bin
 # environment
- 
 GOPATH = /Users/spph/go
+# environment
+LaunchInstanceID = B31F3521-6ECC-447B-8557-2369E5474C85
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ZYJ7iIoFiG/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.9CzXOFBuPV/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -70,8 +68,6 @@ HOME = /Users/spph
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CLI = 1
-# environment
 VSCODE_CODE_CACHE_PATH = /Users/spph/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 LOGNAME = spph
@@ -83,30 +79,22 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
 XPC_FLAGS = 0x0
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
+# default
+MAKECMDGOALS := all
 # environment
-LC_TERMINAL = iTerm2
-# environment
-SHLVL = 3
+SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = spph
 # makefile
 .DEFAULT_GOAL := 
-# default
-MAKECMDGOALS := all
-# environment
-TERM_SESSION_ID = w0t0p0:E2484D2A-10AC-48C6-974C-BB8D1B665B45
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# environment
-TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
@@ -124,19 +112,11 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.16
-# environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.45003531.45003537.2496D440-1DD7-496D-9644-7538CFBA5331
-# environment
-LC_TERMINAL_VERSION = 3.4.16
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.45003531.45003537
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
-# environment
-ITERM_SESSION_ID = w0t0p0:E2484D2A-10AC-48C6-974C-BB8D1B665B45
-# environment
-COLORFGBG = 7;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F6:0x0:0x0
 # environment
@@ -146,9 +126,9 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
-ITERM_PROFILE = Default
-# environment
 LC_ALL = C
+# environment
+SECURITYSESSIONID = 186a3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -160,11 +140,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-TERM = xterm-256color
-# environment
-VSCODE_PID = 91358
+VSCODE_PID = 1486
 # variable set hash-table stats:
-# Load=74/1024=7%, Rehash=0, Collisions=5/97=5%
+# Load=63/1024=6%, Rehash=0, Collisions=2/86=2%
 
 # Pattern-specific Variable Values
 
@@ -172,7 +150,7 @@ VSCODE_PID = 91358
 
 # Directories
 
-# . (device 16777221, inode 45016397): 13 files, no impossibilities.
+# . (device 16777220, inode 45016397): 13 files, no impossibilities.
 
 # 13 files, no impossibilities in 1 directories.
 
@@ -217,6 +195,7 @@ Makefile:
 # VPATH Search Paths
 
 # No `vpath' search paths.
+ 
 
 # No general (`VPATH' variable) search path.
 
@@ -225,6 +204,6 @@ Makefile:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Fri Aug 19 07:17:33 2022
+# Finished Make data base on Sat Aug 20 21:40:49 2022
 
  

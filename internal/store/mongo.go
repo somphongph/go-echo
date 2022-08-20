@@ -3,16 +3,23 @@ package store
 import (
 	"context"
 
-	"books.api/internal/domain"
+	"books.api/internal/handlers/book"
 	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 type MongoDBStore struct {
 	*mongo.Collection
 }
 
-func NewMongoDBStore(col *mongo.Collection) *MongoDBStore {
-	return &MongoDBStore{Collection: col}
+func NewMongoDBStore() *MongoDBStore {
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI("mongodb://root:example@localhost:27017"))
+	if err != nil {
+		panic("failed to connect database")
+	}
+	collection := client.Database("bookstore").Collection("books")
+
+	return &MongoDBStore{Collection: collection}
 }
 
 // func (s *MongoDBStore) Get(book *domain.Book) error {
@@ -25,7 +32,7 @@ func NewMongoDBStore(col *mongo.Collection) *MongoDBStore {
 // 	return err
 // }
 
-func (s *MongoDBStore) Add(book *domain.Book) error {
+func (s *MongoDBStore) Add(book *book.Book) error {
 	_, err := s.Collection.InsertOne(context.Background(), book)
 	return err
 }
@@ -35,7 +42,7 @@ func (s *MongoDBStore) Add(book *domain.Book) error {
 // 	return err
 // }
 
-func (s *MongoDBStore) Delete(book *domain.Book) error {
+func (s *MongoDBStore) Delete(book *book.Book) error {
 	_, err := s.Collection.DeleteOne(context.Background(), book)
 	return err
 }

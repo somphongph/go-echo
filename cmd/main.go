@@ -5,6 +5,5 @@ import (
 )
 
 func main() {
-	// create a new echo instance
 	router.New()
 }
