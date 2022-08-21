@@ -4,7 +4,8 @@ import (
 	"os"
 
 	"books.api/internal/handler/book"
-	"books.api/internal/store"
+	cache "books.api/internal/store"
+	bookrepo "books.api/internal/store/repository"
 	"github.com/labstack/echo"
 )
 
@@ -16,7 +17,7 @@ func New() *echo.Echo {
 	api := e.Group("/api")
 
 	// books
-	bookHandler := book.NewHandler(store.NewMongoDBStore())
+	bookHandler := book.NewHandler(bookrepo.NewMongoDBStore(), cache.InitCache())
 	books := api.Group("/v1/books")
 	{
 		books.GET("/:id", bookHandler.GetById)

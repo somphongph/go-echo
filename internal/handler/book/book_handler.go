@@ -1,9 +1,11 @@
 package book
 
 import (
+	"encoding/json"
 	"net/http"
 	"time"
 
+	// "books.api/internal/cache"
 	"books.api/internal/common"
 	"books.api/internal/entity"
 	"books.api/internal/model"
@@ -19,14 +21,22 @@ type storer interface {
 	Delete(string) error
 }
 
+type cached interface {
+	Cache(string, interface{}, time.Duration) error
+	ShortCache(string, interface{}) error
+	LongCache(string, interface{}) error
+}
+
 type Handler struct {
 	store storer
+	cache cached
 }
 
-func NewHandler(store storer) *Handler {
-	return &Handler{store: store}
+func NewHandler(store storer, cache cached) *Handler {
+	return &Handler{store: store, cache: cache}
 }
 
+// Get item book
 func (t *Handler) GetById(c echo.Context) error {
 	id := c.Param("id")
 	var book entity.Book
@@ -36,9 +46,14 @@ func (t *Handler) GetById(c echo.Context) error {
 		return c.JSON(http.StatusNotFound, common.ResponseNotFound())
 	}
 
+	// Cached
+	data, _ := json.Marshal(book)
+	t.cache.ShortCache("xxxx", data)
+
 	return c.JSON(http.StatusOK, common.Response(book))
 }
 
+// Get all book
 func (t *Handler) GetAll(c echo.Context) error {
 	var books []entity.Book
 
@@ -50,12 +65,14 @@ func (t *Handler) GetAll(c echo.Context) error {
 	return c.JSON(http.StatusOK, common.Response(books))
 }
 
+// Add book
 func (t *Handler) AddBook(c echo.Context) error {
 	bookRequest := new(bookRequest)
 	if err := c.Bind(&bookRequest); err != nil {
 		return err
 	}
 
+	// Bind object
 	book := &entity.Book{
 		Id:        primitive.NewObjectID(),
 		Isbn:      bookRequest.Isbn,
@@ -75,6 +92,7 @@ func (t *Handler) AddBook(c echo.Context) error {
 	return c.JSON(http.StatusOK, common.Response(book))
 }
 
+// Update book
 func (t *Handler) UpdateBook(c echo.Context) error {
 	params := c.Param("id")
 	id, _ := primitive.ObjectIDFromHex(params)
@@ -84,6 +102,7 @@ func (t *Handler) UpdateBook(c echo.Context) error {
 		return err
 	}
 
+	// Bind object
 	book := &entity.Book{
 		Id:        id,
 		Isbn:      bookRequest.Isbn,
@@ -100,6 +119,7 @@ func (t *Handler) UpdateBook(c echo.Context) error {
 	return c.JSON(http.StatusOK, common.Response(book))
 }
 
+// Delete book
 func (t *Handler) DeleteBook(c echo.Context) error {
 	bookId := c.Param("id")
 
