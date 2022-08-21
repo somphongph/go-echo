@@ -37,6 +37,18 @@ func ResponseError(result string, message string, data interface{}) interface{} 
 	return resp
 }
 
+func ResponseFailed() interface{} {
+	resp := model.ResponseError{
+		Response: model.Response{
+			Result:  "failed",
+			Message: "The operation failed",
+			Data:    nil,
+		},
+	}
+
+	return resp
+}
+
 func ResponseNotFound() interface{} {
 	resp := model.ResponseError{
 		Response: model.Response{

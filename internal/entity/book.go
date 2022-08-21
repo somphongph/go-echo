@@ -8,7 +8,7 @@ import (
 )
 
 type Book struct {
-	Id        primitive.ObjectID `json:"id" bson:"_id"`
+	Id        primitive.ObjectID `json:"id,omitempty" bson:"_id,omitempty"`
 	Isbn      string             `json:"isbn"`
 	Name      model.Locale       `json:"name"`
 	Title     model.Locale       `json:"title"`

@@ -17,9 +17,11 @@ func New() *echo.Echo {
 	bookHandler := book.NewHandler(store.NewMongoDBStore())
 	books := api.Group("/v1/books")
 	{
+		books.GET("/:id", bookHandler.GetById)
+		books.GET("", bookHandler.GetAll)
 		books.POST("", bookHandler.AddBook)
-		// v1.GET("/members", api.GetMembers())
-		// v1.GET("/members/:id", api.GetMember())
+		books.PUT("/:id", bookHandler.UpdateBook)
+		books.DELETE("/:id", bookHandler.DeleteBook)
 	}
 
 	// authors
