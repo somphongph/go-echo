@@ -2,6 +2,7 @@ package store
 
 import (
 	"context"
+	"os"
 
 	"books.api/internal/entity"
 	"go.mongodb.org/mongo-driver/bson"
@@ -15,11 +16,11 @@ type MongoDBStore struct {
 }
 
 func NewMongoDBStore() *MongoDBStore {
-	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI("mongodb://root:example@localhost:27017"))
+	client, err := mongo.Connect(context.Background(), options.Client().ApplyURI(os.Getenv("MONGO_CONNECT")))
 	if err != nil {
 		panic("failed to connect database")
 	}
-	collection := client.Database("bookstore").Collection("books")
+	collection := client.Database(os.Getenv("MONGO_DB_NAME")).Collection("books")
 
 	return &MongoDBStore{Collection: collection}
 }

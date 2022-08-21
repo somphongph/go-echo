@@ -8,9 +8,8 @@ import (
 )
 
 func main() {
-	err := godotenv.Load("local.env")
-	if err != nil {
-		log.Printf("please consider environment variables: %s\n", err)
+	if err := godotenv.Load("../local.env"); err != nil {
+		log.Fatal("Error loading .env file")
 	}
 
 	router.New()

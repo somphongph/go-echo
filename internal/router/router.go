@@ -1,7 +1,6 @@
 package router
 
 import (
-	"log"
 	"os"
 
 	"books.api/internal/handler/book"
@@ -27,9 +26,7 @@ func New() *echo.Echo {
 		books.DELETE("/:id", bookHandler.DeleteBook)
 	}
 
-	e.Logger.Fatal(e.Start(os.Getenv("PORT")))
-
-	log.Print(os.Getenv("PORT"))
+	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
 
 	return e
 }
