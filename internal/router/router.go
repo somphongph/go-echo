@@ -4,6 +4,7 @@ import (
 	"os"
 
 	"books.api/internal/handler/book"
+	"books.api/internal/handler/publicapis"
 	"books.api/internal/store/cache"
 	"books.api/internal/store/repository"
 	"github.com/labstack/echo"
@@ -25,6 +26,12 @@ func New() *echo.Echo {
 		books.POST("", bookHandler.AddBook)
 		books.PUT("/:id", bookHandler.UpdateBook)
 		books.DELETE("/:id", bookHandler.DeleteBook)
+	}
+
+	publicapisHandler := publicapis.NewHandler()
+	publicapis := api.Group("/v1/publicapis")
+	{
+		publicapis.GET("", publicapisHandler.GetApi)
 	}
 
 	e.Logger.Fatal(e.Start(":" + os.Getenv("PORT")))
