@@ -1,5 +1,7 @@
 # go-echo
 
-run
-  make run
-  
+## run
+
+```bash
+make run
+```
