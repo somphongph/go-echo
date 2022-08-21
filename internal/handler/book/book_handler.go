@@ -31,8 +31,9 @@ func (t *Handler) AddBook(c echo.Context) error {
 
 	book := &entity.Book{
 		Id:        primitive.NewObjectID(),
-		Name:      model.Locale{En: bookRequest.Name.En, Th: bookRequest.Title.Th},
-		Title:     model.Locale{En: bookRequest.Title.En, Th: bookRequest.Title.Th},
+		Isbn:      bookRequest.Isbn,
+		Name:      model.Locale{En: bookRequest.NameEn, Th: bookRequest.NameTh},
+		Title:     model.Locale{En: bookRequest.TitleEn, Th: bookRequest.TitleTh},
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
 	}

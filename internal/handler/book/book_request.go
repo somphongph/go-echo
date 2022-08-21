@@ -1,8 +1,9 @@
 package book
 
-import "books.api/internal/model"
-
 type bookRequest struct {
-	Name  model.Locale `json:"name"`
-	Title model.Locale `json:"title"`
+	Isbn    string `json:"isbn"`
+	NameTh  string `json:"nameTh"`
+	NameEn  string `json:"nameEn"`
+	TitleTh string `json:"titleTh"`
+	TitleEn string `json:"titleEn"`
 }
