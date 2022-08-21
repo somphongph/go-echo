@@ -23,7 +23,15 @@ func InitCache() *RedisStore {
 	return &RedisStore{rdb}
 }
 
-func (c *RedisStore) Cache(key string, value interface{}, duration int) error {
+func (c *RedisStore) GetCache(key string) (string, error) {
+	var ctx = context.Background()
+
+	val, err := c.Get(ctx, key).Result()
+
+	return val, err
+}
+
+func (c *RedisStore) SetCache(key string, value interface{}, duration int) error {
 	var ctx = context.Background()
 
 	// Set time in second
@@ -34,7 +42,7 @@ func (c *RedisStore) Cache(key string, value interface{}, duration int) error {
 	return err
 }
 
-func (c *RedisStore) ShortCache(key string, value interface{}) error {
+func (c *RedisStore) SetShortCache(key string, value interface{}) error {
 	var ctx = context.Background()
 
 	// Set time in second
@@ -48,7 +56,7 @@ func (c *RedisStore) ShortCache(key string, value interface{}) error {
 	return err
 }
 
-func (c *RedisStore) LongCache(key string, value interface{}) error {
+func (c *RedisStore) SetLongCache(key string, value interface{}) error {
 	var ctx = context.Background()
 
 	// Set time in second

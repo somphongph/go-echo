@@ -22,9 +22,10 @@ type storer interface {
 }
 
 type cached interface {
-	Cache(string, interface{}, int) error
-	ShortCache(string, interface{}) error
-	LongCache(string, interface{}) error
+	GetCache(string) (string, error)
+	SetCache(string, interface{}, int) error
+	SetShortCache(string, interface{}) error
+	SetLongCache(string, interface{}) error
 }
 
 type Handler struct {
@@ -41,16 +42,25 @@ func (t *Handler) GetById(c echo.Context) error {
 	id := c.Param("id")
 	var book entity.Book
 
+	// Cached
+	cacheKey := id
+	cache, _ := t.cache.GetCache(cacheKey)
+	if len(cache) != 0 {
+		// Response data from cache
+		json.Unmarshal([]byte(cache), &book)
+		return c.JSON(http.StatusOK, common.ResponseCache(book, true))
+	}
+
+	// Get data
 	book, err := t.store.GetById(id)
 	if err != nil {
 		return c.JSON(http.StatusNotFound, common.ResponseNotFound())
 	}
 
-	// Cached
+	// Save data to cache
 	data, _ := json.Marshal(book)
-	t.cache.ShortCache("xxxx", data)
-
-	return c.JSON(http.StatusOK, common.Response(book))
+	t.cache.SetShortCache(cacheKey, data)
+	return c.JSON(http.StatusOK, common.ResponseCache(book, false))
 }
 
 // Get all book
