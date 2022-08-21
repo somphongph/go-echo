@@ -1,4 +1,4 @@
-package bookrepo
+package repository
 
 import (
 	"context"
