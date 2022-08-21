@@ -22,7 +22,7 @@ type storer interface {
 }
 
 type cached interface {
-	Cache(string, interface{}, time.Duration) error
+	Cache(string, interface{}, int) error
 	ShortCache(string, interface{}) error
 	LongCache(string, interface{}) error
 }
